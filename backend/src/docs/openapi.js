@@ -1,11 +1,12 @@
-export const openApiDocument = {
+export function createOpenApiDocument({ apiBaseUrl = 'http://localhost:4000' } = {}) {
+  return {
   openapi: '3.1.0',
   info: {
     title: 'Secure Product Catalog API',
     version: '2.0.0',
     description: 'JWT-protected product catalog API with pagination, search, filtering, Redis caching, and rate limiting.'
   },
-  servers: [{ url: 'http://localhost:4000' }],
+  servers: [{ url: apiBaseUrl }],
   tags: [
     { name: 'Auth' },
     { name: 'Products' },
@@ -233,4 +234,7 @@ export const openApiDocument = {
       }
     }
   }
-};
+  };
+}
+
+export const openApiDocument = createOpenApiDocument();

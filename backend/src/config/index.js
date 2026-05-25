@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 const defaultDevSecret = 'dev-only-secret-change-before-production-32chars';
 const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3001';
+const apiBaseUrl = process.env.API_BASE_URL || `http://localhost:${process.env.API_PORT || process.env.PORT || 4000}`;
 const frontendUrls = [
   frontendUrl,
   ...(process.env.FRONTEND_URLS || '')
@@ -17,6 +18,7 @@ export const config = {
   dataDir: path.resolve(rootDir, process.env.DATA_DIR || './data'),
   nodeEnv: process.env.NODE_ENV || 'development',
   apiPort: Number(process.env.API_PORT || process.env.PORT || 4000),
+  apiBaseUrl,
   frontendUrl,
   frontendUrls,
   jwt: {

@@ -13,6 +13,7 @@ before(async () => {
   const { app, cache } = await createApp({
     dataDir,
     redisUrl: '',
+    apiBaseUrl: 'https://product-stack.onrender.com',
     frontendUrl: 'http://localhost:3001',
     frontendUrls: ['http://localhost:3001', 'https://product-stack-clt.vercel.app'],
     jwt: {
@@ -154,6 +155,7 @@ test('swagger and openapi routes are available', async () => {
   const openApi = await request('/openapi.json');
   assert.equal(openApi.status, 200);
   assert.equal(openApi.body.openapi, '3.1.0');
+  assert.equal(openApi.body.servers[0].url, 'https://product-stack.onrender.com');
 
   const swagger = await fetch(`${context.baseUrl}/api-docs/`);
   assert.equal(swagger.status, 200);

@@ -7,7 +7,7 @@ import helmet from 'helmet';
 import swaggerUi from 'swagger-ui-express';
 import { CacheClient } from './cache/cacheClient.js';
 import { config as defaultConfig } from './config/index.js';
-import { openApiDocument } from './docs/openapi.js';
+import { createOpenApiDocument } from './docs/openapi.js';
 import { requireAuth } from './middleware/auth.js';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
 import { createRateLimiter } from './middleware/rateLimit.js';
@@ -33,6 +33,7 @@ export async function createApp(overrides = {}) {
   await cache.connect();
 
   const authService = new AuthService({ userRepository, jwtConfig: appConfig.jwt });
+  const openApiDocument = createOpenApiDocument({ apiBaseUrl: appConfig.apiBaseUrl });
   const app = express();
   app.locals.logger = logger;
   app.locals.cache = cache;

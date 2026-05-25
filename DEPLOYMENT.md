@@ -10,6 +10,7 @@ Set these in Render dashboard → Environment:
 ```
 PORT=10000
 API_PORT=10000
+API_BASE_URL=https://<your-backend>.onrender.com
 JWT_SECRET=<your-strong-secret-at-least-32-characters>
 ADMIN_EMAIL=admin@example.com
 ADMIN_PASSWORD=ChangeMe123!
@@ -64,6 +65,7 @@ git push origin main
 6. Add these environment variables (click **Add Environment Variable**):
    - `PORT` = `10000`
    - `API_PORT` = `10000`
+   - `API_BASE_URL` = your backend URL (e.g., `https://product-stack.onrender.com`)
    - `JWT_SECRET` = generate a 32+ character random string (use [this generator](https://www.random.org/strings/?num=1&len=32&digits=on&upperalpha=on&loweralpha=on&unique=on&format=html&rnd=new))
    - `ADMIN_EMAIL` = `admin@example.com`
    - `ADMIN_PASSWORD` = `ChangeMe123!`
