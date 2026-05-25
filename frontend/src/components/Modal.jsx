@@ -23,7 +23,6 @@ export function ConfirmDeleteModal({ product, busy, onCancel, onConfirm }) {
   return (
     <Modal title="Delete product?" subtitle="Confirmation required" onClose={onCancel} size="sm">
       <div className="confirm-body">
-        <img src={product.imageUrl || '/products/wearable-kit.svg'} alt="" />
         <p>
           Are you sure you want to delete <strong>{product.name}</strong>? This action removes it from the catalog.
         </p>

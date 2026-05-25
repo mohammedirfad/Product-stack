@@ -918,16 +918,8 @@ td strong {
 /* Confirm Delete Modal Custom elements */
 .confirm-body {
   display: grid;
-  gap: 20px;
+  gap: 18px;
   margin-top: 10px;
-}
-
-.confirm-body img {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 1px solid var(--line);
 }
 
 .confirm-body p {
