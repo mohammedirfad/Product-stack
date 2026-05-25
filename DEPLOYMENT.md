@@ -14,6 +14,7 @@ JWT_SECRET=<your-strong-secret-at-least-32-characters>
 ADMIN_EMAIL=admin@example.com
 ADMIN_PASSWORD=ChangeMe123!
 FRONTEND_URL=https://<your-frontend>.onrender.com
+FRONTEND_URLS=https://<your-frontend>.onrender.com,https://<your-frontend>.vercel.app
 NODE_ENV=production
 REDIS_URL= (leave blank or set to Redis provider URL)
 ```
@@ -67,6 +68,7 @@ git push origin main
    - `ADMIN_EMAIL` = `admin@example.com`
    - `ADMIN_PASSWORD` = `ChangeMe123!`
    - `FRONTEND_URL` = leave as `http://localhost:3001` for now (update after frontend is deployed)
+   - `FRONTEND_URLS` = leave as `http://localhost:3001` for now (update after frontend is deployed)
    - `NODE_ENV` = `production`
    - `REDIS_URL` = leave blank (optional Redis step below)
 7. Click **Create Web Service**
@@ -100,6 +102,7 @@ git push origin main
 - Go back to backend Web Service
 - Edit **Environment**
 - Change `FRONTEND_URL` to your frontend URL (e.g., `https://mobs-frontend.onrender.com`)
+- If you also use Vercel, set `FRONTEND_URLS` to both frontend URLs, comma-separated (e.g., `https://mobs-frontend.onrender.com,https://product-stack-clt.vercel.app`)
 - **Save** (redeploys backend automatically)
 
 ### Verify Frontend Works
@@ -160,7 +163,7 @@ Backend will now use Redis cache. Logs should show `Connected to Redis` if succe
 | Issue | Solution |
 |-------|----------|
 | `.env: not found` on Render | ✅ Fixed! Use `npm run start:api` (no `--env-file`). Set vars in Render dashboard. |
-| CORS error in browser console | Verify backend `FRONTEND_URL` env var matches deployed frontend URL exactly |
+| CORS error in browser console | Verify backend `FRONTEND_URL` or `FRONTEND_URLS` includes the deployed frontend URL exactly |
 | `JWT_SECRET must be at least 32 characters` | Generate a 32+ char secret and set in Render env |
 | Products don't load | Open browser DevTools → Network. Check API request URL and response status. |
 | Static site rebuild not triggered | Manually trigger in Render dashboard → Static Site → Manual Deploy |

@@ -14,6 +14,7 @@ before(async () => {
     dataDir,
     redisUrl: '',
     frontendUrl: 'http://localhost:3001',
+    frontendUrls: ['http://localhost:3001', 'https://product-stack-clt.vercel.app'],
     jwt: {
       issuer: 'test-api',
       secret: 'test-secret-with-more-than-32-characters',
@@ -72,6 +73,21 @@ test('login works, listing is public, write endpoints require auth', async () =>
   assert.ok(products.body.facets.categories.includes('Electronics'));
   assert.deepEqual(products.body.facets.categories, ['Electronics', 'Home', 'Fashion']);
   assert.ok(products.body.items.every((product) => product.imageUrl));
+});
+
+test('cors allows configured Vercel frontend origin', async () => {
+  const response = await fetch(`${context.baseUrl}/api/auth/login`, {
+    method: 'OPTIONS',
+    headers: {
+      origin: 'https://product-stack-clt.vercel.app',
+      'access-control-request-method': 'POST',
+      'access-control-request-headers': 'content-type'
+    }
+  });
+
+  assert.equal(response.status, 204);
+  assert.equal(response.headers.get('access-control-allow-origin'), 'https://product-stack-clt.vercel.app');
+  assert.match(response.headers.get('access-control-allow-methods'), /POST/);
 });
 
 test('product CRUD, validation, and cache invalidation work', async () => {

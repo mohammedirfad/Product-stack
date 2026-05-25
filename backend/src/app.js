@@ -47,13 +47,17 @@ export async function createApp(overrides = {}) {
       crossOriginResourcePolicy: { policy: 'cross-origin' }
     })
   );
+  const frontendUrls = (appConfig.frontendUrls || [appConfig.frontendUrl])
+    .map((url) => normalizeOrigin(url))
+    .filter(Boolean);
   const frontendPort = new URL(appConfig.frontendUrl).port || '3001';
   const corsOptions = {
     origin(requestOrigin, callback) {
       // Allow no-origin (curl, Postman, server-to-server)
       if (!requestOrigin) return callback(null, true);
+      const normalizedOrigin = normalizeOrigin(requestOrigin);
       try {
-        const { hostname, port } = new URL(requestOrigin);
+        const { hostname, port } = new URL(normalizedOrigin);
         const samePort = port === frontendPort || (!port && (frontendPort === '80' || frontendPort === '443'));
         const isLocalhost = hostname === 'localhost' || hostname === '127.0.0.1';
         // Allow any private-network IP on the same frontend port (LAN access)
@@ -61,8 +65,8 @@ export async function createApp(overrides = {}) {
         if (samePort && (isLocalhost || isPrivateIP)) {
           return callback(null, true);
         }
-        // Also allow the explicitly configured FRONTEND_URL
-        if (requestOrigin === appConfig.frontendUrl) {
+        // Also allow explicitly configured frontend origins.
+        if (frontendUrls.includes(normalizedOrigin)) {
           return callback(null, true);
         }
         return callback(new Error(`CORS: origin ${requestOrigin} is not allowed`));
@@ -100,4 +104,13 @@ export async function createApp(overrides = {}) {
   app.use(errorHandler);
 
   return { app, productRepository, userRepository, cache };
+}
+
+function normalizeOrigin(value) {
+  if (!value) return '';
+  try {
+    return new URL(value).origin;
+  } catch {
+    return '';
+  }
 }

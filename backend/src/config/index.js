@@ -3,13 +3,22 @@ import { fileURLToPath } from 'node:url';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 const defaultDevSecret = 'dev-only-secret-change-before-production-32chars';
+const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3001';
+const frontendUrls = [
+  frontendUrl,
+  ...(process.env.FRONTEND_URLS || '')
+    .split(',')
+    .map((url) => url.trim())
+    .filter(Boolean)
+];
 
 export const config = {
   rootDir,
   dataDir: path.resolve(rootDir, process.env.DATA_DIR || './data'),
   nodeEnv: process.env.NODE_ENV || 'development',
   apiPort: Number(process.env.API_PORT || process.env.PORT || 4000),
-  frontendUrl: process.env.FRONTEND_URL || 'http://localhost:3001',
+  frontendUrl,
+  frontendUrls,
   jwt: {
     issuer: 'secure-product-catalog-api',
     secret: process.env.JWT_SECRET || defaultDevSecret,
