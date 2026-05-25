@@ -1,7 +1,4 @@
 {
   "buildCommand": "npm install && npm run build:web",
-  "outputDirectory": "frontend/dist",
-  "env": {
-    "VITE_API_URL": "@vite-api-url"
-  }
+  "outputDirectory": "frontend/dist"
 }
