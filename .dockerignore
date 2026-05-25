@@ -1,0 +1,6 @@
+.git
+.sixth
+node_modules
+data/*.runtime.json
+.env
+coverage

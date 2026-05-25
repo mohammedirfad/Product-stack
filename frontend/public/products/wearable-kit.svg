@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-label="Premium wearable product">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#e8f5ff"/>
+      <stop offset="1" stop-color="#cfdfff"/>
+    </linearGradient>
+    <linearGradient id="watch" x1="0" x2="1">
+      <stop offset="0" stop-color="#111827"/>
+      <stop offset="1" stop-color="#334155"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="420" rx="42" fill="url(#bg)"/>
+  <circle cx="500" cy="80" r="96" fill="#ffffff" opacity=".46"/>
+  <rect x="260" y="60" width="120" height="300" rx="48" fill="url(#watch)"/>
+  <rect x="220" y="130" width="200" height="170" rx="42" fill="#0f172a"/>
+  <rect x="242" y="152" width="156" height="126" rx="28" fill="#38bdf8"/>
+  <path d="M274 236c28-54 68-54 96 0" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="320" cy="214" r="16" fill="#fff"/>
+  <rect x="88" y="246" width="150" height="62" rx="31" fill="#fff" opacity=".92"/>
+  <rect x="112" y="270" width="94" height="14" rx="7" fill="#2563eb"/>
+</svg>

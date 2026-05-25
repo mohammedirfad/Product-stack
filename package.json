@@ -1,0 +1,41 @@
+{
+  "name": "secure-product-catalog-assignment",
+  "version": "1.0.0",
+  "description": "Separated Express API and React product catalog frontend for the FullStack Developer Test Assignment.",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev:api": "node --watch --env-file=.env backend/src/server.js",
+    "dev:web": "vite --host 0.0.0.0 --port 3001 --config frontend/vite.config.js",
+    "start:api": "node --env-file=.env backend/src/server.js",
+    "start:web": "vite --host 0.0.0.0 --port 3001 --config frontend/vite.config.js",
+    "test": "npm run test:unit && npm run test:jest",
+    "test:unit": "node --test tests/*.test.js",
+    "test:jest": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.cjs",
+    "test:e2e": "playwright test --config playwright.config.js",
+    "build:web": "vite build --config frontend/vite.config.js"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.0.0",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.468.0",
+    "multer": "^2.1.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "redis": "^4.7.0",
+    "sharp": "^0.34.5",
+    "swagger-ui-express": "^5.0.1",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "jest": "^30.4.2"
+  }
+}
